@@ -1,0 +1,1 @@
+aby zagrać odpal grę
