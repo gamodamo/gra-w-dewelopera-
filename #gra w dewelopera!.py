@@ -336,9 +336,10 @@ class bot():
     
     def play(self):
         global cena
-        if cena==5 or 7:
+        if cena<=7:
+            cena*=0.8
             possible_actions=self.bot_cash/cena
-            possible_actions=round(possible_actions,0) #14.7=>14
+            possible_actions=int(possible_actions) 
             price=possible_actions*cena
             self.bot_cash-=price
             self.bot_actions+=possible_actions
@@ -346,6 +347,8 @@ class bot():
         elif cena>=17:
             possible_price=self.bot_actions*cena
             self.bot_cash+=possible_price
+            impediment=possible_price*0.1
+            self.bot_cash-=impediment
             self.bot_actions=0
         
         else:
@@ -362,7 +365,7 @@ class bot():
             self.bot_cash-=tax
             self.timer=0
 
-Test=bot(2222,0,'Bartek')
+Test=bot(10,0,'Bartek')
 
 def bot_player():
     global Test
@@ -417,7 +420,7 @@ def start_game():
 
 kurs()
 while True:
-    print(Test.bot_cash)
+    print(f'{Test.bot_cash}  {Test.bot_actions}')
     date()
     start_game()
     bot_player()
