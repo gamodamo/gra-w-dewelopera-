@@ -16,11 +16,23 @@ metatimer_up=0
 metatimer_down=0
 metatimer_error=0
 metatimer_event=0
+month=1
+year=2000
+
+def date():
+    global month,year,cash
+    print(f'|{month}| |{year}|')
+    month+=1
+    if month==12:
+        year+=1
+        month=0
+        print('happy new year!')
+        cash+=2
 
 def kurs():
     global cena,down_cours,up_cours,event_error
     if event_error==True:
-        cena=2137
+        cena=6.66
     elif down_cours==True:
         cena=0.5*10
     elif up_cours==True:
@@ -49,6 +61,7 @@ def error_course():
     event_error=True
     print('Wystąpił błąd!')
     t=input('')
+
 
 def wydarzenie():    
     if event==True:
@@ -325,7 +338,7 @@ def start_game():
 
 kurs()
 while True:
-    print(f'{cash}  {actions}')
+    date()
     start_game()
     metatimer_for_all()
     kurs()
