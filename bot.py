@@ -1,3 +1,4 @@
+
 class bot():
     def __init__(self,bot_cash,bot_actions,name):
         self.bot_cash=bot_cash
@@ -5,8 +6,7 @@ class bot():
         self.name=name
         self.timer=0
     
-    def play(self):
-        global cena
+    def play(self,cena):
         if cena<=7:
             cena*=0.8
             possible_actions=self.bot_cash/cena

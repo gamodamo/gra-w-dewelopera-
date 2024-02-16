@@ -329,9 +329,9 @@ def shop():
         Dark_Net(1)
 
 def bot_player():
-    global Test
+    global Test,cena
     Test.tax_bot()
-    Test.play()
+    Test.play(cena)
 
 Test=bot(10,0,'Bartek')
 
