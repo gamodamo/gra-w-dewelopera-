@@ -1,6 +1,7 @@
 #gra w dewelopera!
 import random
 import os
+import json
 cash=0
 actions=0
 cena=1
@@ -19,6 +20,37 @@ metatimer_event=0
 month=1
 year=2000
 
+def save():
+    global cash,actions,darkN,month,year
+    new_save={
+        "cash":cash,
+        "actions":actions,
+        "darkN":darkN,
+        "month":month,
+        "year":year
+    }
+    with open('dane_grawdewelopera.json','w') as old_save:
+        json.dump(new_save,old_save,indent=4)
+
+def load():
+    global cash,actions,darkN,month,year
+    
+    with open('dane_grawdewelopera.json','r') as old_save:
+        new_save = json.load(old_save)
+    cash=new_save["cash"]
+    actions=new_save["cash"]
+    darkN=new_save["darkN"]
+    month=new_save["month"]
+    year=new_save["year"]
+
+def load_or_save():
+    choice=int(input('Zapisz(1) lub Wczytaj(0)'))
+    match choice:
+        case 1:
+            save()
+        case 0:
+            load()
+        
 def date():
     global month,year,cash
     print(f'|{month}| |{year}|')
@@ -301,34 +333,38 @@ def start_game():
     print(f'=====aktualna cena {cena}$ =====')
     try:
         if darkN==True:
-            choice=int(input('wybierz opcje: 1(inwestuj) 2(sprzedaj) 3(sprawdź swój portfel) 4(Wejdź do sklepu) 5(wykonaj prace) 6(We!dx D0 D@rKK NqTu) : '))
+            choice=int(input('wybierz opcje: 1(zarządzaj savem) 2(inwestuj) 3(sprzedaj) 4(sprawdź swój portfel) 5(Wejdź do sklepu) 6(wykonaj prace) 7(We!dx D0 D@rKK NqTu) : '))
             match choice:
                 case 1:
-                    inwestycja()
+                    load_or_save()
                 case 2:
-                    sell()
+                    inwestycja()
                 case 3:
-                    view_wallet()
+                    sell()
                 case 4:
-                    shop()
+                    view_wallet()
                 case 5:
-                    choice_job()
+                    shop()
                 case 6:
+                    choice_job()
+                case 7:
                     Dark_Net(2)
                 case _:
                     pass
         else:
-            choice=int(input('wybierz opcje: 1(inwestuj) 2(sprzedaj) 3(sprawdź swój portfel) 4(Wejdź do sklepu) 5(wykonaj prace) : '))
+            choice=int(input('wybierz opcje: 1(zarządzaj savem) 2(inwestuj) 3(sprzedaj) 4(sprawdź swój portfel) 5(Wejdź do sklepu) 6(wykonaj prace) : '))
             match choice:
                 case 1:
-                    inwestycja()
+                    load_or_save()
                 case 2:
-                    sell()
+                    inwestycja()
                 case 3:
-                    view_wallet()
+                    sell()
                 case 4:
-                    shop()
+                    view_wallet()
                 case 5:
+                    shop()
+                case 6:
                     choice_job()
                 case _:
                     pass
