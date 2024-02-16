@@ -19,6 +19,8 @@ metatimer_error=0
 metatimer_event=0
 month=1
 year=2000
+cash_bot=1
+actions_bot=1
 
 def save():
     global cash,actions,darkN,month,year
@@ -326,9 +328,51 @@ def shop():
     elif value==2:
         Dark_Net(1)
 
+class bot():
+    global cena
+    def __init__(self,bot_cash,bot_actions,name):
+        self.bot_cash=bot_cash
+        self.bot_actions=bot_actions
+        self.name=name
+        self.timer=0
+    
+    def play(self):
+        if cena==5 or 7:
+            possible_actions=self.bot_cash/cena
+            possible_actions=round(possible_actions,0)
+            price=possible_actions*cena
+            self.bot_cash-=price
+            self.bot_actions+=possible_actions
+        
+        elif cena>=17:
+            possible_price=self.bot_actions*cena
+            self.bot_cash+=possible_price
+            self.bot_actions=0
+        
+        else:
+            pass
+    
+    def hello(self):
+        print(f'hello! Nazywam się {self.name} i jestem niezależnym inwestorem!')
+        pass
+    
+    def tax_bot(self):
+        self.timer+=1
+        if self.timer>=10:
+            tax=self.bot_cash*0.3
+            self.bot_cash-=tax
+            self.timer=0
+
+Test=bot(20,0,'Bartek')
+
+def bot_player():
+    global Test
+    Test.tax_bot()
+    Test.play()
+
 def start_game():
     global cena,cash,darkN
-    round(cash,1)
+    cash=round(cash,1)
     occurrence_of_tax()    
     print(f'=====aktualna cena {cena}$ =====')
     try:
