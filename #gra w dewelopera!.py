@@ -19,8 +19,7 @@ metatimer_error=0
 metatimer_event=0
 month=1
 year=2000
-cash_bot=1
-actions_bot=1
+
 
 def save():
     global cash,actions,darkN,month,year
@@ -329,7 +328,6 @@ def shop():
         Dark_Net(1)
 
 class bot():
-    global cena
     def __init__(self,bot_cash,bot_actions,name):
         self.bot_cash=bot_cash
         self.bot_actions=bot_actions
@@ -337,9 +335,10 @@ class bot():
         self.timer=0
     
     def play(self):
+        global cena
         if cena==5 or 7:
             possible_actions=self.bot_cash/cena
-            possible_actions=round(possible_actions,0)
+            possible_actions=round(possible_actions,0) #14.7=>14
             price=possible_actions*cena
             self.bot_cash-=price
             self.bot_actions+=possible_actions
@@ -363,7 +362,7 @@ class bot():
             self.bot_cash-=tax
             self.timer=0
 
-Test=bot(20,0,'Bartek')
+Test=bot(2222,0,'Bartek')
 
 def bot_player():
     global Test
@@ -418,8 +417,10 @@ def start_game():
 
 kurs()
 while True:
+    print(Test.bot_cash)
     date()
     start_game()
+    bot_player()
     metatimer_for_all()
     kurs()
     os.system('cls')
