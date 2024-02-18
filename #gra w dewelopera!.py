@@ -20,6 +20,8 @@ metatimer_error=0
 metatimer_event=0
 month=1
 year=2000
+buissness=False
+bots=[]
 
 
 def save():
@@ -328,12 +330,22 @@ def shop():
     elif value==2:
         Dark_Net(1)
 
-def bot_player():
-    global Test,cena
-    Test.tax_bot()
-    Test.play(cena)
+def bot_player(name_bot):
+    global cena
+    name_bot.tax_bot()
+    name_bot.play(cena)
 
 Test=bot(10,0,'Bartek')
+
+def buissnes():
+    global cash
+    print('Koszt założenia firmy wynosi 5000$')
+    choice=int(input('Kupujesz? 1(Tak) 0(Nie):  '))
+    match choice:
+        case 1:
+            if cash>=5000:
+                buissness=True
+
 
 def start_game():
     global cena,cash,darkN
@@ -386,7 +398,7 @@ while True:
     print(f'{Test.bot_cash}  {Test.bot_actions}')
     date()
     start_game()
-    bot_player()
+    bot_player(Test)
     metatimer_for_all()
     kurs()
     os.system('cls')
